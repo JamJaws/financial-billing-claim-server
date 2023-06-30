@@ -2,7 +2,7 @@ import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.1"
+    id("org.springframework.boot") version "2.7.13"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
@@ -13,7 +13,7 @@ group = "com.jamjaws.riv"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
@@ -27,17 +27,17 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // cxf
-    implementation("org.apache.cxf:cxf-spring-boot-starter-jaxws:4.0.2")
-    implementation("org.apache.cxf:cxf-rt-features-logging:4.0.2")
-    cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:4.0.0")
-    cxfCodegen("jakarta.annotation:jakarta.annotation-api:2.1.1")
+    implementation("org.apache.cxf:cxf-spring-boot-starter-jaxws:3.6.1")
+    implementation("org.apache.cxf:cxf-rt-features-logging:3.6.1")
+    cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3")
+    cxfCodegen("jakarta.annotation:jakarta.annotation-api:1.3.5")
     cxfCodegen("ch.qos.logback:logback-classic:1.2.10")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "17"
+        jvmTarget = "11"
     }
 }
 
@@ -52,7 +52,7 @@ tasks.withType<Wsdl2Java>().configureEach {
 }
 
 cxfCodegen {
-    cxfVersion.set("4.0.0")
+    cxfVersion.set("3.6.1")
 }
 
 tasks.register("financialbillingclaim", Wsdl2Java::class) {
